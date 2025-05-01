@@ -21,18 +21,30 @@ public class Agenda{
   }
   
   public void eliminarContacto(String nombreDeContacto){
-    for(Contacto contacto : agenda){
-      if(contacto.getNombre().equals(nombreDeContacto)){
-        agenda.remove(contacto);
-        System.out.println("Contacto " + contacto.getNombre() + " eliminado");
-      }
-    }  
+    boolean eliminado = agenda.removeIf(contacto -> contacto.getNombre().equals(nombreDeContacto));
+    if (eliminado) {
+        System.out.println("Contacto " + nombreDeContacto + " eliminado");
+    } else {
+        System.out.println("No se encontró ningún contacto con el nombre " + nombreDeContacto);
+    }
   }
   
   public void mostrarContactos(){
+    System.out.println("---------------------------------");
+    System.out.println("AGENDA DE CONTACTOS\n");
     for (Contacto contacto : agenda){
-      System.out.println(contacto);
+      System.out.println(contacto + "\n");
     }
+    System.out.println("---------------------------------");
+  }
+
+  public boolean contains(String nombreDeContacto){
+    for(Contacto contacto : agenda){
+      if(contacto.getNombre().equals(nombreDeContacto)){
+        return true;
+      }
+    }
+    return false;
   }
   
 }
